@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Rock,Paper,Scissor</title>
+</head>
+<style>
+   *{
+      align-items: center;
+      background-color:blue;
+   }
+   .body{
+      padding: 10px;
+        border-radius: 5px;
+        height: 480px;
+        width:400px;
+        margin:auto;
+        background-color: rgb(85, 85, 226);
+        align-items: center;
+        margin-top: 50px;
+        box-shadow: 1px 10px 10px;
+
+   }
+   .top,h1,span,b{
+      text-align: center;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background-color: rgb(85, 85, 226);
+      color: #f7f7f7;
+      border-radius: 10px;
+      height: 50px;
+      
+   }
+   .game_options_images{
+      padding: 10px;
+        border-radius: 5px;
+        margin:auto;
+        background-color: rgb(85, 85, 226);
+        align-items: center;   
+   }
+   button{
+      transition: 0.3s;
+      height: 50px;
+      width: 100px;
+      border-radius: 5px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+   }
+   button:hover {
+  background-color: #e73333;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+  
+
+</style>
+<body>
+   <div class="body">
+      <div class="top"><h1>Rock-Paper-Scissors</h1>
+         <span id="playerDisplay"></span><br><br>
+
+         <span id="computerDisplay"></span><br><br>
+
+         <div class="game_options_images">
+            <button onclick="playGame('ROCK')">👊</button>
+            <button onclick="playGame('PAPER')">✋</button>
+            <button onclick="playGame('SCISSOR')">✌️</button>
+            </span><br><br>
+            <b id="resultDisplay">Select your choice <br>To start the game</b><br><br>
+            <h2>score</h2><br>
+            
+            <b>player:</b>
+            <b id="playerScoreDisplay"> 0 </b><br><br>
+
+            <b>computer:</b>
+            <b id="computerScoreDisplay"> 0 </b>
+            
+         </div>
+
+
+      </div> 
+   </div>
+   <script>
+    const choices = ["ROCK", "PAPER", "SCISSOR"];
+    const playerDisplay = document.getElementById("playerDisplay");
+    const computerDisplay = document.getElementById("computerDisplay");
+    const resultDisplay = document.getElementById("resultDisplay");
+    const playerScoreDisplay = document.getElementById("playerScoreDisplay");
+    const computerScoreDisplay = document.getElementById("computerScoreDisplay");
+    let playerScore = 0;
+    let computerScore = 0;
+    
+
+    function playGame(playerChoice){
+
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+        let result = "";
+
+        if(playerChoice === computerChoice){
+            result = "IT'S A TIE! "
+        }
+        else{
+            switch(playerChoice){
+                case "ROCK":
+                    result = (computerChoice === "SCISSOR") ? "YOU WIN! " : "YOU LOSE! ";
+                    break;
+                case "PAPER":
+                    result = (computerChoice === "ROCK") ? "YOU WIN! " : "YOU LOSE! ";
+                    break;
+                case "SCISSOR":
+                    result = (computerChoice === "PAPER") ? "YOU WIN! " : "YOU LOSE! ";
+                    break;
+            }
+        }
+
+        playerDisplay.textContent = `PLAYER: ${playerChoice}`;
+        computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
+        resultDisplay.textContent = result;
+
+        resultDisplay.classList.remove("greenText", "redText");
+
+        switch(result){
+            case "YOU WIN! ":
+                resultDisplay.classList.add("Text");
+                playerScore++;
+                playerScoreDisplay.textContent = playerScore;
+                break;
+            case "YOU LOSE! ":
+                resultDisplay.classList.add("redText");
+                computerScore++;
+                computerScoreDisplay.textContent = computerScore;
+                break;
+        }
+    }
+
+</script>
+
+</body>
+</html>
